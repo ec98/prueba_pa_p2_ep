@@ -1,5 +1,7 @@
 package com.uce.edu.demo.vehiculos.repository;
 
+import java.math.BigDecimal;
+
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.vehiculos.Vehiculo;
@@ -19,6 +21,10 @@ public class VehiculoRepositoryImpl implements IVehiculoRepository {
 		System.out.println("Buscando el vehiculo con la placa  " + placa);
 		Vehiculo vehiculo = new Vehiculo();
 		vehiculo.setPlaca(placa);
+		vehiculo.setMarca("ABD-1992");
+		vehiculo.setModelo("Mazda");
+		vehiculo.setPrecio(new BigDecimal(54022));
+		vehiculo.setTipo("Pesado");
 		return vehiculo;
 	}
 
@@ -29,9 +35,9 @@ public class VehiculoRepositoryImpl implements IVehiculoRepository {
 	}
 
 	@Override
-	public void eliminar(Vehiculo v) {
+	public void eliminar(String placa) {
 		// TODO Auto-generated method stub
-		System.out.println("Eliminando vehiculo " + v);
+		System.out.println("Eliminando vehiculo " + placa);
 	}
 
 }

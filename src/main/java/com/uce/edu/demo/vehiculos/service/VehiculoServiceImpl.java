@@ -15,7 +15,7 @@ public class VehiculoServiceImpl implements IVehiculoService{
 	@Override
 	public void ingresar(Vehiculo v) {
 		// TODO Auto-generated method stub
-		this.iVehiculoRepository.actualizar(v);
+		this.iVehiculoRepository.ingresar(v);
 	}
 
 	@Override
@@ -31,9 +31,9 @@ public class VehiculoServiceImpl implements IVehiculoService{
 	}
 
 	@Override
-	public void eliminar(Vehiculo v) {
+	public void eliminar(String placa) {
 		// TODO Auto-generated method stub
-		this.iVehiculoRepository.eliminar(v);
+		this.iVehiculoRepository.eliminar(placa);
 	}
 	
 	

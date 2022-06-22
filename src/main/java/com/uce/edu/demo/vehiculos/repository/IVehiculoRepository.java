@@ -10,5 +10,5 @@ public interface IVehiculoRepository {
 
 	public void actualizar(Vehiculo v);
 
-	public void eliminar(Vehiculo v);
+	public void eliminar(String placa);
 }

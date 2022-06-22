@@ -1,24 +1,37 @@
 package com.uce.edu.demo.vehiculos;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
-@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Propietario {
 	private String nombre;
 	private String apellido;
 	private String cedula;
+	private LocalDateTime fechaNacimiento;
 
 	@Override
 	public String toString() {
-		return "Propietario [nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula + "]";
+		return "Propietario [nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula + ", fechaNacimiento="
+				+ fechaNacimiento + "]";
 	}
 
 	// GET Y SET
+
 	public String getNombre() {
 		return nombre;
+	}
+
+	public LocalDateTime getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(LocalDateTime fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
 
 	public void setNombre(String nombre) {

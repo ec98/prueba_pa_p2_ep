@@ -22,9 +22,7 @@ public class PropietarioServiceImpl implements IPropietarioService {
 	@Override
 	public void eliminar(String cedula) {
 		// TODO Auto-generated method stub
-		Propietario propietario = new Propietario();
-		propietario.setCedula(cedula);
-		this.iPropietarioRepository.eliminar(propietario);
+		this.iPropietarioRepository.eliminar(cedula);
 	}
 
 }

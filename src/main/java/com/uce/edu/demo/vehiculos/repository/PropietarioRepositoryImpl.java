@@ -1,5 +1,7 @@
 package com.uce.edu.demo.vehiculos.repository;
 
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.vehiculos.Propietario;
@@ -14,9 +16,22 @@ public class PropietarioRepositoryImpl implements IPropietarioRepository {
 	}
 
 	@Override
-	public void eliminar(Propietario p) {
+	public void eliminar(String cedula) {
 		// TODO Auto-generated method stub
-		System.out.println("Eliminando el propietario "+p);
+		System.out.println("Eliminando el propietario "+cedula);
 	}
+
+	@Override
+	public Propietario consultar(String cedula) {
+		// TODO Auto-generated method stub
+		Propietario prope = new Propietario();
+		prope.setApellido(cedula);
+		prope.setNombre("Edwin");
+		prope.setApellido("Piruch");
+		prope.setFechaNacimiento(LocalDateTime.now());
+		return prope;
+	}
+	
+	
 
 }

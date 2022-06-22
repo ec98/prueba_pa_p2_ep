@@ -8,30 +8,35 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.vehiculos.Matricula;
 import com.uce.edu.demo.vehiculos.Propietario;
 import com.uce.edu.demo.vehiculos.Vehiculo;
-import com.uce.edu.demo.vehiculos.service.IMatriculaService;
+import com.uce.edu.demo.vehiculos.service.IMatriculaGestorService;
+import com.uce.edu.demo.vehiculos.service.IPropietarioService;
 import com.uce.edu.demo.vehiculos.service.IVehiculoService;
+
 
 @SpringBootApplication
 public class PruebaPaP2EpApplication implements CommandLineRunner {
 
 	@Autowired
-	private Propietario propietario;
-
-	@Autowired
-	private Vehiculo vehiculo;
-	
-	@Autowired
-	private Vehiculo vehiculo1;
-
-	@Autowired
 	private IVehiculoService iVehiculoService;
 
 	@Autowired
-	private IMatriculaService iMatriculaService;
+	private IPropietarioService iPropietarioService;
+	
+	@Autowired
+	private IMatriculaGestorService iMatriculaGestorService;
+	
+	@Autowired
+	private Propietario propietario;
+	
+	@Autowired
+	private Propietario propietario2;
+	
+	@Autowired
+	private Vehiculo vehiculo;
 
+	
 	public static void main(String[] args) {
 		SpringApplication.run(PruebaPaP2EpApplication.class, args);
 	}
@@ -39,53 +44,38 @@ public class PruebaPaP2EpApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		
-		// 1
-		this.propietario.setNombre("Edwin");
-		this.propietario.setApellido("Piruch");
-		this.propietario.setCedula("1725860553");
+		this.vehiculo.setMarca("Totota");
+		this.vehiculo.setPlaca("ABD-2021");
+		this.vehiculo.setPrecio(new BigDecimal(50000));
+		this.vehiculo.setTipo("L");
 
-		System.out.println(this.propietario);
+		this.iVehiculoService.ingresar(this.vehiculo);
 
 		// 2
-		this.vehiculo.setMarca("Toyo");
-		this.vehiculo.setModelo("Toyota");
-		this.vehiculo.setPlaca("PDU-2021");
-		this.vehiculo.setPrecio(new BigDecimal("1200"));
-		this.vehiculo.setTipo("Pesado");
-
-		this.vehiculo.setPlaca("ABD-1932");
-
-		// 3
-		// Aplicando scope tipo PROTOTYPE EP
+		//Aplicando scope tipo Singleton
+		this.vehiculo.setPrecio(new BigDecimal(40000));
+		this.vehiculo.setMarca("Toyota");
 		this.iVehiculoService.actualizar(vehiculo);
 
-		// 4
-		Matricula matricula = new Matricula();
-		matricula.setFecha(LocalDateTime.of(2020, 8, 23, 14, 32, 12));
-		matricula.setPropietario(propietario);
-		matricula.setValor(new BigDecimal("1500"));
-		matricula.setVehiculo(vehiculo);
-				
-		this.vehiculo1.setMarca("Mercedes");
-		this.vehiculo1.setModelo("Mazda");
-		this.vehiculo1.setPlaca("EDP-2321");
-		this.vehiculo1.setPrecio(new BigDecimal("2500"));
-		this.vehiculo1.setTipo("Liviano");
+		// 3
+		//Aplicando scope tipo Prototype
+		this.propietario.setApellido("Piruch");
+		this.propietario.setCedula("1725860553");
+		this.propietario.setFechaNacimiento(LocalDateTime.now());
+		this.propietario.setNombre("Edwin");
 		
-		//Comprobando calculo valor de matricula del vehiculo 1 PESADO
-		this.iMatriculaService.crear(matricula);
-		this.iMatriculaService.calcular(matricula, vehiculo);
+		this.propietario2.setNombre("Maria");
+		this.propietario2.setApellido("De los Angeles");
+		this.propietario2.setCedula("1239322821");
+		this.propietario2.setFechaNacimiento(LocalDateTime.now());
 		
-		Matricula matricula1 = new Matricula();
-		matricula1.setFecha(LocalDateTime.of(2022, 2, 12, 21, 12, 22));
-		matricula1.setPropietario(propietario);
-		matricula1.setValor(new BigDecimal("2500"));
-		matricula1.setVehiculo(vehiculo1);
+
+		this.iPropietarioService.crear(this.propietario);
+		this.iPropietarioService.crear(this.propietario2);
 		
-		//Comprobando calculo valor de matricula del vehiculo 1 LIVIANO
-		this.iMatriculaService.crear(matricula1);
-		this.iMatriculaService.calcular(matricula, vehiculo1);
+		//4
+		this.iMatriculaGestorService.generar("1725860553", "ABD-2021");
+		
 	}
 
 }
